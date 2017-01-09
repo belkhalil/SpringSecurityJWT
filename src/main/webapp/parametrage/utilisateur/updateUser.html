@@ -1,0 +1,111 @@
+<div class="page-content-wrap" ng-controller="UserController as ctrl">
+
+	<div class="row">
+
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">{{poste.id == null ? 'Ajouter' :
+						'Modifier'}} Un utilisateur</h3>
+				</div>
+				<div class="panel-body">
+					<form class="form-horizontal" name="registerForm">
+						<input type="hidden" ng-model="utilisateur.id" />
+
+						<div class="form-group">
+							<label class="col-md-3 col-xs-12 control-label">Nom</label>
+							<div class="col-md-3 col-xs-12">
+								<input name="libelle" ng-model="utilisateur.firstName" type="text"
+									class="form-control" ng-minlength="2" ng-maxlength="50"
+									required />
+							</div>
+							<label class="col-md-1 col-xs-12 control-label">Prenom</label>
+							<div class="col-md-3 col-xs-12">
+								<input name="prenom" ng-model="utilisateur.lastName" type="text"
+									class="form-control" ng-minlength="2" ng-maxlength="50"
+									required />
+							</div>
+						</div>
+						
+						
+						<div class="form-group">
+							<label class="col-md-3 col-xs-12 control-label">telephone</label>
+							<div class="col-md-3 col-xs-12">
+								<input name="telephone" ng-model="utilisateur.telephone"
+									class="form-control" type="number" ng-minlength="10"
+									ng-maxlength="10" disable-valid-styling="true" />
+							</div>
+							<label class="col-md-1 col-xs-12 control-label">mail</label>
+							<div class="col-md-3 col-xs-12">
+								<input name="mail" ng-model="utilisateur.email" type="email"
+									class="form-control" required ng-change="initLogin()"/>
+							</div>
+						</div>
+
+						<h2></h2>
+						<div class="form-group">
+							<label class="col-md-3 col-xs-12 control-label" for="password">Mot
+								de passe</label>
+							<div class="col-md-3 col-xs-12"
+								ng-class="{'has-error': registerForm.$dirty && registerForm.Password.$invalid, 'has-success': registerForm.Password.$valid}">
+								<input id="password" type="password" class="form-control"
+									required ng-minlength="6" name="password"
+									ng-model="utilisateur.password" /> <span
+									class="text-danger col-sm-offset-3"
+									ng-show="registerForm.Password.$error.minlength">
+									Password too short </span>
+							</div>
+							<label class="col-md-1 col-xs-12 control-label"
+								for="ConfirmPassword">Confirmation</label>
+							<div class="col-md-3 col-xs-12"
+								ng-class="{'has-error': registerForm.$dirty && registerForm.ConfirmPassword.$invalid, 'has-success': registerForm.ConfirmPassword.$valid}">
+								<input id="ConfirmPassword" type="password" class="form-control"
+									required equals-to="registerForm.password"
+									name="ConfirmPassword" ng-model="confirmPassword" /> <span
+									class="text-danger col-sm-offset-3"
+									ng-show="!registerForm.ConfirmPassword.$error.required && registerForm.ConfirmPassword.$error.equalsTo">
+									Passwords are differents </span>
+							</div>
+						</div>
+						<div class="form-group">
+
+							<label class="col-md-3 col-xs-12 control-label"></label>
+							<div class="col-md-6 col-xs-12"></div>
+
+						</div>
+						<div class="form-group">
+
+							<label class="col-md-3 col-xs-12 control-label"> </label>
+							<div class="col-md-6 col-xs-12"></div>
+
+						</div>
+					</form>
+				</div>
+				<div class="panel-footer">
+					<button type="submit" class="btn btn-default"
+						onClick="javascript:window.history.go(-1)">Retour</button>
+					<input type="submit" class="btn btn-success"
+						value="{{!ctrl.poste.id ? 'Enregistrer' : 'Modifier'}}"
+						ng-click="submit()" ng-disabled="registerForm.$invalid"
+						style="float: right;" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<script type="text/javascript">
+    $('.selectpicker').selectpicker('refresh');
+
+    // 		    bootselectpicker: function() {
+    // 		    	   return {
+    // 		    	     restrict: "A",
+    // 		    	     require: "ngModel",
+    // 		    	     link: function(scope, element, attrs, ctrl) {
+    // 				    	   $timeout(function() {
+    // 				    	      element.selectpicker();
+    // 				    	   });
+    // 				    	}
+    // 		    	   }
+    // 		    	 }
+</script>
